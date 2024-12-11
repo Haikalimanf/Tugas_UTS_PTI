@@ -14,7 +14,7 @@
                 {{ __('Product') }}
             </h2>
         </x-slot>
-        <x-show-product :buku="$buku"></x-show-product>
+        <x-show-product :buku="$buku"/>
     @else
         <p class="text-red-500">Role tidak dikenali.</p>
     @endif

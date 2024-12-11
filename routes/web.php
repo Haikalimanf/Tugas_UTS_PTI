@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TransaksiController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -34,6 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/buy-product/{id}', [DatabaseBookController::class, 'buy'])->name('buy-product');
     Route::post('/add-product', [DatabaseBookController::class, 'store'])->name('store-product');
     Route::delete('/delete-product/{id}', [DatabaseBookController::class, 'destroy'])->name('delete-product');
+
+    Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
+    Route::post('/transaksi/store', [TransaksiController::class, 'store'])->name('transaksi.store');
+    Route::get('/transaksi/show', [TransaksiController::class, 'showTransaction'])->name('transaksi.show');
+
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

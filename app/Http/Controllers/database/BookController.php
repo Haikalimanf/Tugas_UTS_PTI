@@ -87,6 +87,32 @@ public function store(Request $request)
     return redirect()->route('dashboard')->with('success', 'Buku berhasil ditambahkan!');
 }
 
+public function buy(Request $request)
+{
+    $request->validate([
+        'id' => 'required|exists:buku,id',
+        'jumlah' => 'required|integer|min:1',
+    ]);
 
+    $buku = Buku::find($request->id);
+
+    // Kurangi stok
+    if ($buku->stok >= $request->jumlah) {
+        $buku->stok -= $request->jumlah;
+        $buku->save();
+
+        // Hitung total harga
+        $total_harga = $buku->harga * $request->jumlah;
+
+        // Redirect ke halaman sukses transaksi
+        return view('transactions.success', [
+            'judul' => $buku->judul,
+            'jumlah' => $request->jumlah,
+            'total_harga' => $total_harga,
+        ]);
+    }
+
+    return redirect()->back()->withErrors(['stok' => 'Stok tidak cukup']);
+}
 
 }
