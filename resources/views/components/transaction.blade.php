@@ -38,10 +38,14 @@ function confirmPurchase() {
                 'Pembelian Anda telah dikonfirmasi.',
                 'success'
             ).then(() => {
-                window.location.href = '/generate-receipt';
+                const judul = '{{ $judul }}';
+                const jumlah_beli = '{{ $jumlah_beli }}'; 
+                const total_harga = '{{ $total_harga }}'; 
+                window.location.href = `/generate-receipt?judul=${encodeURIComponent(judul)}&jumlah_beli=${jumlah_beli}&total_harga=${total_harga}`;
             });
         }
-    })
+    });
 }
+
 
 </script>
