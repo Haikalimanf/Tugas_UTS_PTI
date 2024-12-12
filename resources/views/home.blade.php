@@ -53,20 +53,19 @@
                             <h3 class="text-xl font-semibold text-gray-800 dark:text-white">{{ $book->judul }}</h3>
                             <p class="text-gray-600 dark:text-gray-300 mt-2">{{ Str::limit($book->description, 100) }}</p>
                             <p class="text-lg font-semibold text-blue-500 dark:text-blue-400 mt-4">Rp {{ number_format($book->harga, 0, ',', '.') }}</p>
-                            <form action="/buy/{{ $book->id }}" method="POST">
-                                @csrf
-                                <button type="submit" class="mt-4 w-full bg-blue-700 text-white py-2 rounded-md hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 transition duration-300 dark:bg-blue-600 dark:hover:bg-blue-700">
-                                    Beli Buku
-                                </button>
-                            </form>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
-
 </body>
 
+<footer class="bg-gray-800 text-white py-4 mt-10">
+    <div class="container mx-auto text-center">
+        <p class="text-lg font-semibold">NIM: 10122196 | Nama: Haikal Iman Firdaus | Kelas: IF-6</p>
+        <p class="text-sm mt-2">&copy; 2024 - Dibuat oleh Haikal Iman Firdaus</p>
+    </div>
+</footer>
 
 </html>

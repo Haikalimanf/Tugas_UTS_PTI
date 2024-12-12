@@ -1,3 +1,7 @@
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
 @props(['judul', 'jumlah_beli', 'total_harga'])
 <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
     <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Detail Pembelian</h3>
@@ -10,8 +14,34 @@
 
     <div class="flex justify-between items-center">
         <a href="{{ route('dashboard') }}" class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-300">Kembali ke Daftar Buku</a>
-        <button class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">
+        <button onclick="confirmPurchase()" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">
             Konfirmasi Pembelian
         </button>
     </div>
 </div>
+
+<script>
+function confirmPurchase() {
+    Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: "Anda tidak dapat membatalkan ini setelah konfirmasi!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, beli sekarang!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+                'Dikonfirmasi!',
+                'Pembelian Anda telah dikonfirmasi.',
+                'success'
+            ).then(() => {
+                window.location.href = '/generate-receipt';
+            });
+        }
+    })
+}
+
+</script>
