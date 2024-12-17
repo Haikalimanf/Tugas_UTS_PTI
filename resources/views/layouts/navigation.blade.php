@@ -11,36 +11,28 @@
                 </div>
 
                 <!-- Navigation Links -->
-                @if (Auth::user()->role === 'admin')
-                    <!-- Navigation Links Admin -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden sm:flex sm:space-x-8 sm:-my-px sm:ms-10">
+                    @if (Auth::user()->role === 'admin')
+                        <!-- Navigation Links Admin -->
                         <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('Home') }}
                         </x-nav-link>
-                    </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('dashboard-admin')" :active="request()->routeIs('dashboard-admin')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
-                    </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('addProduct')" :active="request()->routeIs('addProduct')">
                             {{ __('Tambah Produk') }}
                         </x-nav-link>
-                    </div>
-                @elseif (Auth::user()->role === 'customer')
-                    <!-- Navigation Links User -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @elseif (Auth::user()->role === 'customer')
+                        <!-- Navigation Links User -->
                         <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('Home') }}
                         </x-nav-link>
-                    </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('dashboard-customer')" :active="request()->routeIs('dashboard-customer')">
                             {{ __('Product') }}
                         </x-nav-link>
-                    </div>
-                @endif
+                    @endif
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -86,6 +78,30 @@
                     </svg>
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div x-show="open" class="sm:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            @if (Auth::user()->role === 'admin')
+                <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    {{ __('Home') }}
+                </x-nav-link>
+                <x-nav-link :href="route('dashboard-admin')" :active="request()->routeIs('dashboard-admin')">
+                    {{ __('Dashboard') }}
+                </x-nav-link>
+                <x-nav-link :href="route('addProduct')" :active="request()->routeIs('addProduct')">
+                    {{ __('Tambah Produk') }}
+                </x-nav-link>
+            @elseif (Auth::user()->role === 'customer')
+                <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    {{ __('Home') }}
+                </x-nav-link>
+                <x-nav-link :href="route('dashboard-customer')" :active="request()->routeIs('dashboard-customer')">
+                    {{ __('Product') }}
+                </x-nav-link>
+            @endif
         </div>
     </div>
 </nav>

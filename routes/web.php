@@ -47,11 +47,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/admin', [AdminController::class, 'index'])->name('dashboard-admin');
 });
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
-    Route::get('/customer', [CustomerController::class, 'index'])->name('dashboard');
+    Route::get('/customer', [CustomerController::class, 'index'])->name('dashboard-customer');
 });
 
 require __DIR__.'/auth.php';
